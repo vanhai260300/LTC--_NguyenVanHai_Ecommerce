@@ -1,0 +1,42 @@
+﻿@model ModelFE.FE.Category
+@{
+    ViewBag.Title = "Update";
+}
+
+
+<div class="row px-md-4 mt-md-4">
+    <h2>Update</h2>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Enter the information to be edited | <a href="/Admin/Category">Back To List</a></div>
+            <div class="panel-body container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm("Update", "Category", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <label>Name Category</label>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @autofocus = "autofocus" })
+                                <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description<span style="color: red; font-style:italic;">Nếu Tên danh mục có sự thay đổi thì vui lòng nhập lại Tên danh mục vào đây</span></label>
+                                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Description!" })
+                                <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</p>
+                            </div>
+
+                            <button type="reset" class="btn btn-default">Reset</button>
+                            <button type="submit" class="btn btn-success">Save</button>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

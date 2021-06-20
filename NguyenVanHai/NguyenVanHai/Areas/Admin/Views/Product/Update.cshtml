@@ -1,0 +1,73 @@
+﻿@model ModelFE.FE.Product
+@{
+    ViewBag.Title = "Update Product";
+}
+<div class="row px-md-4 mt-md-4">
+    <h1>Update Product @Html.DisplayTextFor(model=>model.Name)</h1>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Enter complete information | @Html.ActionLink("Back to List", "Index")</div>
+            <div class="panel-body container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm("Update", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Name Product</label>
+                                        @Html.TextBoxFor(model => model.Name, "", new { @class = "form-control", @autofocus = "autofocus" })
+                                        <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        @Html.DropDownListFor(model => model.IDCategory, (IEnumerable<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
+                                        <p>@Html.ValidationMessageFor(model => model.IDCategory, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        @Html.TextBoxFor(model => model.UnitCost, new { @class = "form-control" })
+                                        <p>@Html.ValidationMessageFor(model => model.UnitCost, "", new { @class = "text-danger", @type = "number" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @type = "number", @step = "10" })
+                                        <p>@Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                </div>  
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                        <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</p>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                           {
+                                             new SelectListItem { Text = "Hide", Value = "Hide"},
+                                             new SelectListItem { Text = "Show", Value = "Show"},
+                                          }, "Select Status", new { @class = "form-control" })
+                                        <p>@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Chose the Image</label>
+                                <input type="file" class="form-control" id="upLoadImage" name="upLoadImage" accept="image/*" value="" />
+                                <p>@Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })</p>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

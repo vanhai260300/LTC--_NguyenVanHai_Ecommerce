@@ -1,0 +1,47 @@
+﻿@model ModelFE.FE.UserAccount
+@{
+    ViewBag.Title = "Detail User";
+}
+
+<div class="container px-md-4 mt-md-4">
+    <h2>Detail</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Enter complete information | <a href="/Admin/UserAccounts">Back To List User</a></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @using (Html.BeginForm("", "UserAccounts", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus", @ReadOnly = "true" })
+                                    <p>@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    @Html.PasswordFor(model => model.PassWord, new { @class = "form-control", @autofocus = "autofocus", @ReadOnly = "true" })
+                                    <p>@Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status<span style="color: red; font-style:italic;"></span></label>
+                                    @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @ReadOnly = "true" })
+                                    <p>@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Update", new { id = Model.ID }) |
+        @Html.ActionLink("Back to Home", "Index")
+    </p>
+</div>
+

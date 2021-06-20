@@ -1,0 +1,55 @@
+﻿.logo-admin{
+    color:gray;
+    margin-left:13px;
+}
+a{
+    color:gray;
+}
+a:hover{
+    text-decoration:none;
+    color:cadetblue;
+}
+thead tr {
+    background-color: black;
+    color: white;
+    text-align: center;
+    
+}
+.table thead th {
+    vertical-align: inherit;
+
+    
+}
+.create-new a:hover{
+    color:cadetblue;
+}
+.button-create-new {
+    background-color: #ff00007d;
+    color: white;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 3px 23px;
+    border-color: #ff00007d;
+}
+.button-create-new a{
+    color:white;
+}
+.update a{
+    background:black;
+    color:white;
+    padding:0 23px;
+    display:block;
+    border-radius:12px;
+    white-space:nowrap;
+    width:100px;
+    text-align:center;
+    margin: 7px auto;
+}
+tr > td {
+    text-align: center !important;
+    vertical-align: inherit !important;
+}
+.form-group.seack {
+    display: flex;
+}
+

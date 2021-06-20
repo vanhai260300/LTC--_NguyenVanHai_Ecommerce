@@ -1,0 +1,43 @@
+﻿@model List<ModelFE.FE.Category>
+<div class="container">
+    <div class="header">
+        <div class="col-md-9 header-left">
+            <div class="top-nav">
+                <ul class="memenu skyblue">
+                    <li class="active"> @Html.ActionLink("Home", "Index")</li>
+                    <li class="grid">
+                        <a href="#">Category</a>
+                        <div class="mepanel">
+                            <div class="row">
+                                <div class="col12 me-one">
+                                    <h4>Shop</h4>
+                                    <ul>
+                                        <li>@Html.ActionLink("All Product", "Index", "Product")</li>
+                                        @foreach (var item in Model)
+                                        {
+                                            <li><a href="/Product/ByCategory/@item.ID">@item.Name</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="grid">
+                        <a href="#">Blog</a>
+                    </li>
+                    <li class="grid">
+                        @Html.ActionLink("Contact", "Index", "Contact")
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-3 header-right">
+            <div class="search-bar">
+                <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="submit" value="">
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

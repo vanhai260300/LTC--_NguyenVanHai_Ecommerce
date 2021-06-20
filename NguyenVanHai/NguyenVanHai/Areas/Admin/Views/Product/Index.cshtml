@@ -1,0 +1,102 @@
+﻿@using ModelFE
+@model PagedList.IPagedList<ModelFE.FE.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container px-md-4 mt-md-4">
+    <h1>Products</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Products</li>
+    </ol>
+    <div class="card mb-4">
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    List Products | @Html.ActionLink("Add Product", "CreateProduct", "", new { @class = "btn btn-primary" })
+                    <!-- /.panel-heading -->
+                    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                    {
+                        <div class="row  my-2" style="margin-top:10px;">
+                            <div class="col-sm-2 col-sm-offset-8">
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <input type="search" value="@ViewBag.Search" class="form-control input-sm" name="searchString" placeholder="Search..." />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name Product</th>
+                                        <th>Unit Cost</th>
+                                        <th>Quanlity</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="odd gradeX" id="row_@item.ID">
+                                            <td>@item.ID</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.UnitCost</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.Category.Name</td>
+                                            <td>@item.Status</td>
+                                            <td class="row col" style="margin:auto; ">
+                                                @Html.ActionLink("Detail", "DetailProduct", new { id = item.ID }, new { @class = "col-4 btn btn-warning bt-update" })
+                                                @Html.ActionLink("Update", "Update", new { id = item.ID }, new { @class = "btn btn-success col-4" })
+                                                <div class="col-4 btn btn-danger bt-delete">
+                                                    @Ajax.ActionLink("Delete", "DeleteAJax", new { @id = item.ID }, new AjaxOptions
+                                                                                {
+                                                                                    Confirm = "Do you want to delete this Product?",
+                                                                                    OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                                                                    HttpMethod = "Delete"
+                                                                                })
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="dataTables_info" aria-live="polite">
+                                        Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) to @Model.PageSize of @Model.PageCount entries
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="dataTables_paginate paging_simple_numbers">
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @Search = ViewBag.Search }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+</div>
+

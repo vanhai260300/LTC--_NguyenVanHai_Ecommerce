@@ -1,0 +1,49 @@
+﻿@model ModelFE.FE.Category
+@{
+    ViewBag.Title = "DetailCategory";
+}
+
+
+<div class="row px-md-4 mt-md-4">
+    <h2>Detail Category @Html.DisplayTextFor(model => model.Name)</h2>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="/Admin/Category"></a>@Html.ActionLink("Back to Category list", "Index")</div>
+            <div class="panel-body container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label>ID Category</label>
+                                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", @ReadOnly = "true" })
+                                <p>@Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Name Category</label>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @ReadOnly = "true" })
+                                <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @ReadOnly = "true" })
+                                <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Update", new { id = Model.ID }) |
+        @Html.ActionLink("Back to Home", "Index")
+    </p>
+</div>
+
+
+

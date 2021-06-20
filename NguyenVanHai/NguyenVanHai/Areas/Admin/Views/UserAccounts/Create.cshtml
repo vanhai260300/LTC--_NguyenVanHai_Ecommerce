@@ -1,0 +1,53 @@
+﻿@model ModelFE.FE.UserAccount
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container px-md-4 mt-md-4">
+    <h2>Create Category</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Enter complete information | <a href="/Admin/Category">Back To List</a></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @using (Html.BeginForm("Create", "UserAccounts", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus" })
+                                    <p>@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    @Html.PasswordFor(model => model.PassWord, new { @class = "form-control", @autofocus = "autofocus" })
+                                    <p>@Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status <span style="color: red; font-style:italic;"></span></label>
+                                    <div class="form-group">
+                                        <label>Status <span style="color: red; font-style:italic;"></span></label>
+                                        @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                        {
+                                          new SelectListItem { Text = "BLOCKED", Value = "BLOCKED"},
+                                       }, "Select Status", new { @class = "form-control" })
+                                        <p>@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <p>@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })</p>
+                                </div>
+                                <button type="reset" class="btn btn-default">Reset</button>
+                                <button type="submit" class="btn btn-success">Save</button>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
